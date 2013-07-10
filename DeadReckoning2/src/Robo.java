@@ -1,9 +1,10 @@
+import java.util.ArrayList;
+
 import lejos.nxt.Button;
 import lejos.nxt.LCD;
 
 public class Robo {
-
-	static MovimentacaoBasica movimento = new MovimentacaoBasica();
+static MovimentacaoBasica movimento = new MovimentacaoBasica();
 
 	// Inicialização da thread de controle de velocidade nos botões
 	ControleDeVelocidade controleVel = new ControleDeVelocidade();
@@ -21,8 +22,10 @@ public class Robo {
 	ControleCartesiano controle = new ControleCartesiano();
 	Coordenadas coordenadas1 = new Coordenadas(0, 0);
 	Coordenadas coordenadas2 = new Coordenadas(15, 68);
-	Coordenadas coordenadas3 = new Coordenadas(115, 83);
-
+	Coordenadas coordenadas3 = new Coordenadas(43.5, 129.73);
+	Coordenadas coordenadas4 = new Coordenadas(115, 83);
+	
+	
 	public void funcionaRobo() throws InterruptedException {
 		// Impressão do resultado do calculo de coordenadas no LCD
 		LCD.setAutoRefresh(true);
@@ -45,11 +48,12 @@ public class Robo {
 
 		//LCD.asyncRefresh();
 
+		
 		while (!Button.ESCAPE.isDown()) {
 
 			controleVelocidade.start();
-			sensorSonico.start();
-			sensorCor.start();
+		//	sensorSonico.start();
+		//	sensorCor.start();
 
 			// Inicio da movimentação para cumprir o percurso
 			movimento.girarAngulo(90 - controle.calcularAngulo(
@@ -59,8 +63,6 @@ public class Robo {
 					coordenadas1.getX(), coordenadas1.getY(),
 					coordenadas2.getX(), coordenadas2.getY()));
 	
-			LCD.drawString(movimento.qtdPercorrida() + "", 0, 4);
-			//LCD.asyncRefresh();
 			movimento.girarAngulo(-(90 - controle.calcularAngulo(
 					coordenadas1.getX(), coordenadas1.getY(),
 					coordenadas2.getX(), coordenadas2.getY())));
@@ -72,9 +74,19 @@ public class Robo {
 					coordenadas2.getX(), coordenadas2.getY(),
 					coordenadas3.getX(), coordenadas3.getY()));
 			
+			movimento.girarAngulo(-(90 - controle.calcularAngulo(
+					coordenadas2.getX(), coordenadas2.getY(),
+					coordenadas3.getX(), coordenadas3.getY())));
+			movimento.girarAngulo(90 - controle.calcularAngulo(
+					coordenadas3.getX(), coordenadas3.getY(),
+					coordenadas4.getX(), coordenadas4.getY()));
+			movimento.moverParaFrente(controle.calcularDistancia(
+					coordenadas3.getX(), coordenadas3.getY(),
+					coordenadas4.getX(), coordenadas4.getY()));
+
 			controleVelocidade.interrupt();
-			sensorSonico.interrupt();
-			sensorCor.interrupt();
+		//sensorSonico.interrupt();
+		//	sensorCor.interrupt();
 			
 		}
 	}

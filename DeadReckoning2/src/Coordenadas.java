@@ -3,9 +3,9 @@ public class Coordenadas {
 	private float X;
 	private float Y;
 	
-	public Coordenadas(float x, float y) {
-		this.X = x;
-		this.Y = y;
+	public Coordenadas(double d, double e) {
+		this.X = (float) d;
+		this.Y = (float) e;
 	}
 	
 	public float getX() {

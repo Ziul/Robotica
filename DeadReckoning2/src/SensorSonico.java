@@ -1,39 +1,33 @@
+import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
 
-public class SensorSonico extends UltrasonicSensor implements Runnable {
+public class SensorSonico extends Thread {
 
+	private int read=0; 
 	public SensorSonico() {
-		super(SensorPort.S4);
 	}
 
-//	public SensorSonico(MovimentacaoBasica movimento) {
-//		super(SensorPort.S4);
-//		this.movimento = movimento;
-//	}
 
 	/*
 	 * Thread para leitura do sensor sonico caso haja algum obstaculo o robo
 	 * fara um retangulo de 30 cm de largura e 50 cm de altura para contorna-lo
-	 * e voltará a posição inicial(eu espero)
+	 * e voltarï¿½ a posiï¿½ï¿½o inicial(eu espero)
 	 */
 	public void run() {
+		UltrasonicSensor sonico = new UltrasonicSensor(SensorPort.S4);
+
 		while (true) {
-			continuous();
-			if (getDistance() < 13) {
+			sonico.continuous();
+			this.read = sonico.getDistance();
+			if (this.read !=0) {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(100);
+					LCD.drawString(""+this.read,0,0);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Robo.movimento.girarAngulo(-90);
-				Robo.movimento.moverParaFrente(15);
-				Robo.movimento.girarAngulo(90);
-				Robo.movimento.moverParaFrente(15);
-				Robo.movimento.girarAngulo(90);
-				Robo.movimento.moverParaFrente(15);
-				Robo.movimento.girarAngulo(-90);
 			}
 		}
 	}

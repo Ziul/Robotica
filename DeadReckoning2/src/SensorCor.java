@@ -20,6 +20,13 @@ public class SensorCor implements Runnable{
 			//LCD.asyncRefresh();
 			if(vals.getColor()==7){
 				Robo.movimento.pararInstantaneamente();
+				Robo.movimento.moverParaFrente(7);
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			else{
 			}

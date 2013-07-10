@@ -11,7 +11,7 @@ public class MovimentacaoBasica {
 	public MovimentacaoBasica() {
 	}
 
-	public synchronized void moverParaFrente(double dist) {
+	public synchronized void  moverParaFrente(double dist) {
 		rotator.setTravelSpeed(8);
 		rotator.travel(dist);
 	}

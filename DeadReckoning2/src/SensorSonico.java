@@ -3,8 +3,6 @@ import lejos.nxt.UltrasonicSensor;
 
 public class SensorSonico extends UltrasonicSensor implements Runnable {
 
-	//MovimentacaoBasica movimento;
-
 	public SensorSonico() {
 		super(SensorPort.S4);
 	}
@@ -22,13 +20,19 @@ public class SensorSonico extends UltrasonicSensor implements Runnable {
 	public void run() {
 		while (true) {
 			continuous();
-			if (getDistance() < 25) {
+			if (getDistance() < 13) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Robo.movimento.girarAngulo(-90);
-				Robo.movimento.moverParaFrente(30);
+				Robo.movimento.moverParaFrente(15);
 				Robo.movimento.girarAngulo(90);
-				Robo.movimento.moverParaFrente(30);
+				Robo.movimento.moverParaFrente(15);
 				Robo.movimento.girarAngulo(90);
-				Robo.movimento.moverParaFrente(30);
+				Robo.movimento.moverParaFrente(15);
 				Robo.movimento.girarAngulo(-90);
 			}
 		}

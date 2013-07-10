@@ -58,10 +58,9 @@ public class Robo {
 			movimento.moverParaFrente(controle.calcularDistancia(
 					coordenadas1.getX(), coordenadas1.getY(),
 					coordenadas2.getX(), coordenadas2.getY()));
-
+	
 			LCD.drawString(movimento.qtdPercorrida() + "", 0, 4);
 			//LCD.asyncRefresh();
-
 			movimento.girarAngulo(-(90 - controle.calcularAngulo(
 					coordenadas1.getX(), coordenadas1.getY(),
 					coordenadas2.getX(), coordenadas2.getY())));
@@ -73,9 +72,9 @@ public class Robo {
 					coordenadas2.getX(), coordenadas2.getY(),
 					coordenadas3.getX(), coordenadas3.getY()));
 			
-			//controleVelocidade.interrupt();
-			//sensorSonico.interrupt();
-			//sensorCor.interrupt();
+			controleVelocidade.interrupt();
+			sensorSonico.interrupt();
+			sensorCor.interrupt();
 			
 		}
 	}

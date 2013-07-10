@@ -8,12 +8,6 @@ public class SensorSonico extends Thread {
 	public SensorSonico() {
 	}
 
-
-	/*
-	 * Thread para leitura do sensor sonico caso haja algum obstaculo o robo
-	 * fara um retangulo de 30 cm de largura e 50 cm de altura para contorna-lo
-	 * e voltar� a posi��o inicial(eu espero)
-	 */
 	public void run() {
 		UltrasonicSensor sonico = new UltrasonicSensor(SensorPort.S4);
 
@@ -23,7 +17,7 @@ public class SensorSonico extends Thread {
 			if (this.read !=0) {
 				try {
 					Thread.sleep(100);
-					LCD.drawString(""+this.read,0,0);
+					LCD.drawString(""+this.read,0,5);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

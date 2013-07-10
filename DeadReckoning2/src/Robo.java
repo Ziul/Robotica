@@ -52,8 +52,8 @@ static MovimentacaoBasica movimento = new MovimentacaoBasica();
 		while (!Button.ESCAPE.isDown()) {
 
 			controleVelocidade.start();
-		//	sensorSonico.start();
-		//	sensorCor.start();
+			sensorSonico.start();
+			sensorCor.start();
 
 			// Inicio da movimentação para cumprir o percurso
 			movimento.girarAngulo(90 - controle.calcularAngulo(
@@ -84,9 +84,19 @@ static MovimentacaoBasica movimento = new MovimentacaoBasica();
 					coordenadas3.getX(), coordenadas3.getY(),
 					coordenadas4.getX(), coordenadas4.getY()));
 
+			movimento.girarAngulo(-(90 - controle.calcularAngulo(
+					coordenadas3.getX(), coordenadas3.getY(),
+					coordenadas4.getX(), coordenadas4.getY())));
+			movimento.girarAngulo(90 - controle.calcularAngulo(
+					coordenadas3.getX(), coordenadas3.getY(),
+					coordenadas4.getX(), coordenadas4.getY()));
+			movimento.moverParaFrente(controle.calcularDistancia(
+					coordenadas4.getX(), coordenadas4.getY(),
+					coordenadas3.getX(), coordenadas3.getY()));
+
 			controleVelocidade.interrupt();
-		//sensorSonico.interrupt();
-		//	sensorCor.interrupt();
+			sensorSonico.interrupt();
+			sensorCor.interrupt();
 			
 		}
 	}

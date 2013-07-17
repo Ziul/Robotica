@@ -1,3 +1,10 @@
+/**
+ * Programa de mapeamento de sala
+ * 
+ * @author luiz
+ *
+ */
+
 
 public class Mapping {
 

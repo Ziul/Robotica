@@ -24,6 +24,7 @@ static MovimentacaoBasica movimento = new MovimentacaoBasica();
 	Coordenadas coordenadas2 = new Coordenadas(15, 68);
 	Coordenadas coordenadas3 = new Coordenadas(43.5, 129.73);
 	Coordenadas coordenadas4 = new Coordenadas(115, 83);
+	Coordenadas coordenadas5 = new Coordenadas(-103, 64);
 	
 	
 	public void funcionaRobo() throws InterruptedException {
@@ -45,6 +46,11 @@ static MovimentacaoBasica movimento = new MovimentacaoBasica();
 						+ (90 - controle.calcularAngulo(coordenadas2.getX(),
 								coordenadas2.getY(), coordenadas3.getX(),
 								coordenadas3.getY())), 0, 3);
+		
+		LCD.drawString(
+				" "
+						+ (- controle.calcularAngulo(coordenadas3.getX(), coordenadas3.getY(),
+							coordenadas1.getX(), coordenadas1.getY())), 0, 4);
 
 		//LCD.asyncRefresh();
 
@@ -52,9 +58,6 @@ static MovimentacaoBasica movimento = new MovimentacaoBasica();
 		while (!Button.ESCAPE.isDown()) {
 
 			controleVelocidade.start();
-			sensorSonico.start();
-			sensorCor.start();
-
 			// Inicio da movimentação para cumprir o percurso
 			movimento.girarAngulo(90 - controle.calcularAngulo(
 					coordenadas1.getX(), coordenadas1.getY(),
@@ -87,16 +90,36 @@ static MovimentacaoBasica movimento = new MovimentacaoBasica();
 			movimento.girarAngulo(-(90 - controle.calcularAngulo(
 					coordenadas3.getX(), coordenadas3.getY(),
 					coordenadas4.getX(), coordenadas4.getY())));
-			movimento.girarAngulo(90 - controle.calcularAngulo(
-					coordenadas3.getX(), coordenadas3.getY(),
+			movimento.girarAngulo(controle.calcularAngulo(
+					coordenadas3.getX(), (coordenadas3.getY() + 20),
 					coordenadas4.getX(), coordenadas4.getY()));
 			movimento.moverParaFrente(controle.calcularDistancia(
 					coordenadas4.getX(), coordenadas4.getY(),
 					coordenadas3.getX(), coordenadas3.getY()));
 
+			movimento.girarAngulo(-(90 - controle.calcularAngulo(
+					coordenadas1.getX(), coordenadas1.getY(),
+					coordenadas3.getX(), coordenadas3.getY())));
+			
+			movimento.girarAngulo(-25 - controle.calcularAngulo(
+					coordenadas3.getX(), coordenadas3.getY(),
+					coordenadas1.getX(), coordenadas1.getY()));
+
+			movimento.moverParaFrente(controle.calcularDistancia(
+					coordenadas3.getX(), coordenadas3.getY(),
+					coordenadas1.getX(), coordenadas1.getY()));
+
+			movimento.girarAngulo(90 - controle.calcularAngulo(
+					coordenadas1.getX(), coordenadas1.getY(),
+					coordenadas4.getX(), coordenadas4.getY()));
+			movimento.girarAngulo(-30+controle.calcularAngulo(
+					coordenadas1.getX(), coordenadas1.getY(),
+					coordenadas3.getX(), coordenadas3.getY()));
+			movimento.moverParaFrente(-15+controle.calcularDistancia(
+					coordenadas1.getX(), coordenadas1.getY(),
+					coordenadas4.getX(), coordenadas4.getY()));
+
 			controleVelocidade.interrupt();
-			sensorSonico.interrupt();
-			sensorCor.interrupt();
 			
 		}
 	}
